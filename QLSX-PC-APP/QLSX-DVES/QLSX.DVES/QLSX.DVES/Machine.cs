@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
+/*
+ *  DEV by Thuonghuynh
+ */
 // Declare the delegate prototype to send data back to the form
 //delegate void AddMessage(string sNewMessage);
 //delegate void SetTextCallback(string text);
