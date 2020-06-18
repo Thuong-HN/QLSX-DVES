@@ -1,0 +1,68 @@
+// EPPlus
+
+// open sample excel files
+string folder = _hostingEnvironment.WebRootPath;
+using (var p = new ExcelPackage(new FileInfo(folder + "\\samples\\export_employee_list.xlsx")))
+{
+	// get first worksheet
+	var ws = p.Workbook.Worksheets[0];
+	// ws.DefaultRowHeight = 20;
+
+	int startRow = 5;
+	int endCol = 19;
+	int rowNum = startRow;
+
+	// loop all data
+	foreach (var employee in employees)
+	{
+		ws.Cells[rowNum, 1].Value = (rowNum - startRow + 1);
+		ws.Cells[rowNum, 2].Value = employee.TimeCheckCode;
+		ws.Cells[rowNum, 3].Value = employee.Code;
+		ws.Cells[rowNum, 4].Value = employee.LastName + " " + employee.FirstName;
+		ws.Cells[rowNum, 5].Value = employee.Department.Code;
+		ws.Cells[rowNum, 6].Value = employee.Position.Code;
+		ws.Cells[rowNum, 7].Value = employee.StartDate;
+		ws.Cells[rowNum, 8].Value = employee.SocialInsuranceSalary;
+		ws.Cells[rowNum, 9].Value = employee.Salary;
+
+		ExcelAddress translatedAddress = new ExcelAddress(rowNum, 11, rowNum, 18);
+		ws.Cells[rowNum, 10].Formula = "=SUM(" + translatedAddress.ToString() + ")";
+
+		ws.Cells[rowNum, 11].Value = employee.Responsibility;
+		ws.Cells[rowNum, 12].Value = employee.GasHouseAllowance;
+		ws.Cells[rowNum, 13].Value = employee.FullAttendance;
+		ws.Cells[rowNum, 14].Value = employee.HarmfulAllowance;
+		ws.Cells[rowNum, 15].Value = employee.TechnicalCareer;
+		ws.Cells[rowNum, 16].Value = employee.LanguageAllowance;
+		ws.Cells[rowNum, 17].Value = employee.ShiftAllowance;
+		ws.Cells[rowNum, 18].Value = employee.AdvanceAllowance;
+
+		translatedAddress = new ExcelAddress(rowNum, 9, rowNum, 10);
+		ws.Cells[rowNum, 19].Formula = "=SUM(" + translatedAddress.ToString() + ")";
+
+		ws.Row(rowNum).Height = 20;
+
+		rowNum++;
+	}
+
+	// set borders
+	var border = ws.Cells[startRow, 1, rowNum - 1, endCol].Style.Border;
+	//border.BorderAround(ExcelBorderStyle.Thin);
+	border.Top.Style = border.Right.Style = border.Bottom.Style = border.Left.Style = ExcelBorderStyle.Thin;
+
+	// format cells
+	ws.Column(7).Style.Numberformat.Format = "dd-MMM-yyyy";
+	for (int i = 8; i<=19; i++) ws.Column(i).Style.Numberformat.Format = "#,##0;-#,##0;\"-\"";
+
+	// auto fit columns, start from header rows
+	ws.Cells[startRow-2, 1, rowNum - 1, endCol].AutoFitColumns();
+
+	// output the XLSX file
+	using (var ms = new MemoryStream())
+	{
+		p.SaveAs(ms);
+		ms.Seek(0, SeekOrigin.Begin);
+		fileData = ms.ToArray();
+	}
+}
+return File(fileData, System.Net.Mime.MediaTypeNames.Application.Octet, "employee-list.xlsx");

@@ -1,0 +1,15 @@
+D:\DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.exe.config
+D:\DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.exe
+D:\DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.pdb
+D:\DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\obj\Debug\QLSX.Service.ProjectInstaller.resources
+D:\DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\obj\Debug\QLSX.Service.csproj.GenerateResource.cache
+D:\DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\obj\Debug\QLSX.Service.exe
+D:\DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\obj\Debug\QLSX.Service.pdb
+D:\DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\MySql.Data.dll
+D:\DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\Google.Protobuf.dll
+D:\DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\BouncyCastle.Crypto.dll
+D:\DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\Ubiety.Dns.Core.dll
+D:\DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\Renci.SshNet.dll
+D:\DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\MySql.Data.xml
+D:\DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\obj\Debug\QLSX.Service.csproj.CopyComplete
+D:\DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\obj\Debug\QLSX.Service.csprojAssemblyReference.cache

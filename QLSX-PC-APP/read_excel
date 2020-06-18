@@ -1,0 +1,45 @@
+// NUGET, ExcelDataReader, ExcelDataReader.DataSet
+
+try
+{
+	using (var memoryStream = new MemoryStream())
+	{
+		req.file.CopyTo(memoryStream);
+		// Auto-detect format, supports:
+		//  - Binary Excel files (2.0-2003 format; *.xls)
+		//  - OpenXml Excel files (2007 format; *.xlsx)
+		using (var reader = ExcelReaderFactory.CreateReader(memoryStream))
+		{
+			int startRow = 8; // line 9, zero-based index
+			int successCount = 0;
+			int errorCount = 0;
+
+			var result = reader.AsDataSet(new ExcelDataSetConfiguration()
+			{
+				ConfigureDataTable = (_) => new ExcelDataTableConfiguration()
+				{
+					UseHeaderRow = false,
+					FilterRow = (rowReader) => {
+						return rowReader.Depth >= startRow;
+					}
+				}
+			});
+
+			if (result != null)
+			{
+				DataTable tbl = result.Tables[0];
+
+				var data = tbl.AsEnumerable().Where(x => Utils.Helper.IsNumber(x.Field<object>(0))).ToList(); // loại bỏ dữ liệu thừa
+			 
+				string errMessage = "";
+
+				// lặp từng dòng trong data
+
+			}
+		}
+	}
+}
+catch (Exception ex)
+{
+	
+}

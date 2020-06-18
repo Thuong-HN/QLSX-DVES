@@ -1,0 +1,28 @@
+C:\Users\Windows 10\Desktop\QLSX-DVES\QLSX.DVES\QLSX.DVES\bin\Debug\QLSX.DVES.exe.config
+C:\Users\Windows 10\Desktop\QLSX-DVES\QLSX.DVES\QLSX.DVES\bin\Debug\QLSX.DVES.exe
+C:\Users\Windows 10\Desktop\QLSX-DVES\QLSX.DVES\QLSX.DVES\bin\Debug\QLSX.DVES.pdb
+C:\Users\Windows 10\Desktop\QLSX-DVES\QLSX.DVES\QLSX.DVES\obj\Debug\QLSX.DVES.csprojAssemblyReference.cache
+C:\Users\Windows 10\Desktop\QLSX-DVES\QLSX.DVES\QLSX.DVES\obj\Debug\QLSX.DVES.Properties.Resources.resources
+C:\Users\Windows 10\Desktop\QLSX-DVES\QLSX.DVES\QLSX.DVES\obj\Debug\QLSX.DVES.csproj.GenerateResource.cache
+C:\Users\Windows 10\Desktop\QLSX-DVES\QLSX.DVES\QLSX.DVES\obj\Debug\QLSX.DVES.csproj.CoreCompileInputs.cache
+C:\Users\Windows 10\Desktop\QLSX-DVES\QLSX.DVES\QLSX.DVES\obj\Debug\QLSX.DVES.exe
+C:\Users\Windows 10\Desktop\QLSX-DVES\QLSX.DVES\QLSX.DVES\obj\Debug\QLSX.DVES.pdb
+C:\Users\Windows 10\Desktop\QLSX-DVES\QLSX.DVES\QLSX.DVES\obj\Debug\QLSX.DVES.MAIN.resources
+C:\Users\Windows 10\Desktop\QLSX-DVES\QLSX.DVES\QLSX.DVES\obj\Debug\QLSX.DVES.Popup_Machine.resources
+D:\DVES\QLSX-PC-APP\QLSX-DVES\QLSX.DVES\QLSX.DVES\bin\Debug\QLSX.DVES.exe.config
+D:\DVES\QLSX-PC-APP\QLSX-DVES\QLSX.DVES\QLSX.DVES\bin\Debug\QLSX.DVES.exe
+D:\DVES\QLSX-PC-APP\QLSX-DVES\QLSX.DVES\QLSX.DVES\bin\Debug\QLSX.DVES.pdb
+D:\DVES\QLSX-PC-APP\QLSX-DVES\QLSX.DVES\QLSX.DVES\obj\Debug\QLSX.DVES.csprojAssemblyReference.cache
+D:\DVES\QLSX-PC-APP\QLSX-DVES\QLSX.DVES\QLSX.DVES\obj\Debug\QLSX.DVES.Popup_Machine.resources
+D:\DVES\QLSX-PC-APP\QLSX-DVES\QLSX.DVES\QLSX.DVES\obj\Debug\QLSX.DVES.MAIN.resources
+D:\DVES\QLSX-PC-APP\QLSX-DVES\QLSX.DVES\QLSX.DVES\obj\Debug\QLSX.DVES.Properties.Resources.resources
+D:\DVES\QLSX-PC-APP\QLSX-DVES\QLSX.DVES\QLSX.DVES\obj\Debug\QLSX.DVES.csproj.GenerateResource.cache
+D:\DVES\QLSX-PC-APP\QLSX-DVES\QLSX.DVES\QLSX.DVES\obj\Debug\QLSX.DVES.exe
+D:\DVES\QLSX-PC-APP\QLSX-DVES\QLSX.DVES\QLSX.DVES\obj\Debug\QLSX.DVES.pdb
+D:\DVES\QLSX-PC-APP\QLSX-DVES\QLSX.DVES\QLSX.DVES\bin\Debug\MySql.Data.dll
+D:\DVES\QLSX-PC-APP\QLSX-DVES\QLSX.DVES\QLSX.DVES\bin\Debug\Google.Protobuf.dll
+D:\DVES\QLSX-PC-APP\QLSX-DVES\QLSX.DVES\QLSX.DVES\bin\Debug\BouncyCastle.Crypto.dll
+D:\DVES\QLSX-PC-APP\QLSX-DVES\QLSX.DVES\QLSX.DVES\bin\Debug\Ubiety.Dns.Core.dll
+D:\DVES\QLSX-PC-APP\QLSX-DVES\QLSX.DVES\QLSX.DVES\bin\Debug\Renci.SshNet.dll
+D:\DVES\QLSX-PC-APP\QLSX-DVES\QLSX.DVES\QLSX.DVES\bin\Debug\MySql.Data.xml
+D:\DVES\QLSX-PC-APP\QLSX-DVES\QLSX.DVES\QLSX.DVES\obj\Debug\QLSX.DVES.csproj.CopyComplete
