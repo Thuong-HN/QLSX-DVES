@@ -63,6 +63,16 @@ namespace QLSX.DVES.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap connected {
+            get {
+                object obj = ResourceManager.GetObject("connected", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap dves_logo {
             get {
                 object obj = ResourceManager.GetObject("dves-logo", resourceCulture);
@@ -106,6 +116,16 @@ namespace QLSX.DVES.Properties {
         internal static System.Drawing.Bitmap machine_1 {
             get {
                 object obj = ResourceManager.GetObject("machine-1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap notconnected {
+            get {
+                object obj = ResourceManager.GetObject("notconnected", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

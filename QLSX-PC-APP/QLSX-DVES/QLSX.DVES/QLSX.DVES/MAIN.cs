@@ -11,26 +11,20 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
-// Declare the delegate prototype to send data back to the form
+
 delegate void AddMessage(string sNewMessage);
 delegate void SetTextCallback(string text);
 namespace QLSX.DVES
 {
     public partial class MAIN : Form
     {
-        // Change the username, password and database according to your needs
-        // You can ignore the database option if you want to access all of them.
-        // 127.0.0.1 stands for localhost and the default port to connect.
+    
         string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=;database=test;";
-        // Your query,
         string query = "SELECT * FROM testcreate";
-
-        //private Container _components = null;
-        // My Attributes
-        private Socket m_sock;                      // Server connection
-        private byte[] m_byBuff = new byte[1024];    // Recieved data buffer
-        private event AddMessage m_AddMessage;				// Add Message Event handler for Form
-        
+        private Socket m_sock = null;                      
+        private byte[] m_byBuff = new byte[1024];    
+        private event AddMessage m_AddMessage;
+       
         public MAIN()
         {
             InitializeComponent();
@@ -43,123 +37,125 @@ namespace QLSX.DVES
             //insertData();
             KWH();
             //getData();
-
             connected();
-            // Add Message Event handler for Form decoupling from input thread
             m_AddMessage = new AddMessage(OnAddMessage);
+            
+            
 
         }
         private void FormMain_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (m_sock != null && m_sock.Connected)
+            try
             {
-                m_sock.Shutdown(SocketShutdown.Both);
-                m_sock.Close();
+                if (m_sock != null && m_sock.Connected)
+                {
+                    m_sock.Shutdown(SocketShutdown.Both);
+                    m_sock.Close();
+
+                }
             }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(this, ex.Message, "ERROR!");
+                throw;
+            }
+            
         }
+        
         private void SetText(string text)
         {
-            // InvokeRequired required compares the thread ID of the
-            // calling thread to the thread ID of the creating thread.
-            // If these threads are different, it returns true.
-            if (this.txtGetdata.InvokeRequired)
+            try
             {
-                SetTextCallback d = new SetTextCallback(SetText);
-                this.Invoke(d, new object[] { text });
+                if (this.txtGetdata.InvokeRequired)
+                {
+                    SetTextCallback d = new SetTextCallback(SetText);
+                    this.Invoke(d, new object[] { text });
+                }
+                else
+                {
+                    this.txtGetdata.Text = text;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                this.txtGetdata.Text = text;
+                //MessageBox.Show(this, ex.Message, "ERROR!");
+                throw;
             }
+                 
+            
         }
         // *********************** CONNECTING... *********************************
         private void connected()
         {
+            //MessageBox.Show(this, "CONNECTING.....");
             Cursor cursor = Cursor.Current;
-                    Cursor.Current = Cursors.WaitCursor;
-			            try
-			            {
-				            // Close the socket if it is still open
-				            if(m_sock != null && m_sock.Connected )
-				            {
-					            m_sock.Shutdown(SocketShutdown.Both );
-					            System.Threading.Thread.Sleep( 10 );
-					            m_sock.Close();
-				            }
+            Cursor.Current = Cursors.WaitCursor;
+			try
+			{
+				if(m_sock != null && m_sock.Connected )
+				{
+					 m_sock.Shutdown(SocketShutdown.Both );
+					 System.Threading.Thread.Sleep( 2 );
+					 m_sock.Close();
+                     //pic_stt_connect.Image = Properties.Resources.notconnected;
 
-                // Create the socket object
+                }
                 m_sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp );
-
-                // Define the Server address and port
                 IPEndPoint epServer = new IPEndPoint(IPAddress.Parse("192.168.2.244"), 80);
-
-                // Connect to the server blocking method and setup callback for recieved data
-                // m_sock.Connect( epServer );
-                // SetupRecieveCallback( m_sock );
-
-                // Connect to server non-Blocking method
                 m_sock.Blocking = false;
-				            AsyncCallback onconnect = new AsyncCallback(OnConnect);
+				AsyncCallback onconnect = new AsyncCallback(OnConnect);
                 m_sock.BeginConnect(epServer, onconnect, m_sock);
-			            }
-			            catch(Exception ex )
-			            {
-				            MessageBox.Show( this, ex.Message, "Server Connect failed!" );
+
+
+            }
+			catch(Exception ex )
+			{
+				//MessageBox.Show( this, ex.Message, "Server Connect failed!" );
             }
             Cursor.Current = cursor;
         }
         public void OnConnect(IAsyncResult ar)
         {
-            // Socket was the passed in object
             Socket sock = (Socket)ar.AsyncState;
-
-            // Check if we were sucessfull
             try
             {
+                //SenData();
                 //sock.EndConnect( ar );
                 if (sock.Connected)
+                {
+                    pic_stt_connect.Image = Properties.Resources.connected;
                     SetupRecieveCallback(sock);
-                else
-                    MessageBox.Show(this, "Unable to connect to remote machine", "Connect Failed!");
+                }
+                
+                timer1.Start();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "Unusual error during Connect!");
+                //MessageBox.Show(this, ex.Message, "Reconnect");
             }
         }
         public void OnRecievedData(IAsyncResult ar)
         {
-            // Socket was the passed in object
             Socket sock = (Socket)ar.AsyncState;
-
-            // Check if we got any data
             try
             {
                 int nBytesRec = sock.EndReceive(ar);
                 if (nBytesRec > 0)
                 {
-                    // Wrote the data to the List
                     string sRecieved = Encoding.ASCII.GetString(m_byBuff, 0, nBytesRec);
-
-                    // WARNING : The following line is NOT thread safe. Invoke is
-                    // m_lbRecievedData.Items.Add( sRecieved );
-                    
                     Invoke(m_AddMessage, new string[] { sRecieved });
-
-                    // If the connection is still usable restablish the callback
                     SetupRecieveCallback(sock);
                 }
                 else
                 {
-                    // If no data was recieved then the connection is probably dead
-                    //Console.WriteLine("Client {0}, disconnected", sock.RemoteEndPoint);
                     sock.Shutdown(SocketShutdown.Both);
                     sock.Close();
+                    
                 }
             }
             catch (InvalidOperationException exc)
             {
-                //MessageBox.Show(exc.ToString());
+               // MessageBox.Show(exc.ToString());
             }
 
             catch (Exception exception)
@@ -187,11 +183,11 @@ namespace QLSX.DVES
                 //{
                 //    MessageBox.Show(line);
                 //}
-                //senData(); // RESPONE
+                //SenData(); // RESPONE
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "Setup Recieve Callback failed!");
+                //MessageBox.Show(this, ex.Message, "Setup Recieve Callback failed!");
             }
             
         }
@@ -204,49 +200,35 @@ namespace QLSX.DVES
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "Setup Recieve Callback failed!");
+                //MessageBox.Show(this, ex.Message, "Setup Recieve Callback failed!");
             }
         }
 
         // *********************** SEND *********************************
-        private void senData()
+        private void SenData()
         {
-            // Check we are connected
-            if (m_sock == null || !m_sock.Connected)
-            {
-                MessageBox.Show(this, "Must be connected to Send a message");
-                return;
-            }
 
-            // Read the message from the text box and send it
+            
             try
             {
-                // Convert to byte array and send.
-                Byte[] byteDateLine = Encoding.ASCII.GetBytes("Respone OK".ToCharArray());
+
+                if (m_sock == null || !m_sock.Connected)
+                {
+                    //MessageBox.Show(this, "Must be connected to Send a message");
+                    return;
+                }
+
+                Byte[] byteDateLine = Encoding.ASCII.GetBytes("OK".ToCharArray());
                 m_sock.Send(byteDateLine, byteDateLine.Length, 0);
+
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "Send Message Failed!");
+                //MessageBox.Show(this, ex.Message, "Send Message Failed!");
             }
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            //chart1.Series["ĐIỆN NĂNG"].XValueMember += kwh;
-        }
 
 
         private void KWH()
@@ -273,8 +255,7 @@ namespace QLSX.DVES
             chart1.Series["ĐIỆN NĂNG"].Points.AddXY("MÁY 18", "9800");
             //chart title  
             chart1.Titles.Add("GIÁM SÁT ĐIỆN NĂNG");
-            timer1.Tick += timer1_Tick;
-            timer1.Start();
+            
 
         }
         private void insertData()
@@ -293,7 +274,7 @@ namespace QLSX.DVES
                 databaseConnection.Open();
                 MySqlDataReader myReader = commandDatabase.ExecuteReader();
 
-                MessageBox.Show("User succesfully registered");
+                //MessageBox.Show("User succesfully registered");
 
                 databaseConnection.Close();
             }
@@ -338,22 +319,12 @@ namespace QLSX.DVES
             MySqlDataReader reader;
             try
             {
-                // Open the database
                 databaseConnection.Open();
-                // Execute the query
                 reader = commandDatabase.ExecuteReader();
-
-                // All succesfully executed, now do something
-
-                // IMPORTANT : 
-                // If your query returns result, use the following processor :
-
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
-                        // As our database, the array will contain : ID 0, FIRST_NAME 1,LAST_NAME 2, ADDRESS 3
-                        // Do something with every received database ROW
                         string[] row = { reader.GetString(0), reader.GetString(1), reader.GetString(2) };
                         if (row[1] == "" && row[2] == "")
                         {
@@ -365,15 +336,12 @@ namespace QLSX.DVES
                 }
                 else
                 {
-                    Console.WriteLine("No rows found.");
+                    //Console.WriteLine("No rows found.");
                 }
-
-                // Finally close the connection
                 databaseConnection.Close();
             }
             catch (Exception ex)
             {
-                // Show any error message.
                 MessageBox.Show(ex.Message);
             }
         }
@@ -385,13 +353,18 @@ namespace QLSX.DVES
         {
             try
             {
-                m_sock.Shutdown(SocketShutdown.Both);
-                m_sock.Close();
-                connected();
+                if (m_sock == null || !m_sock.Connected)
+                {
+                    m_sock.Shutdown(SocketShutdown.Both);
+                    m_sock.Close();
+                    connected();
+                }else
+                    MessageBox.Show(this, "CONNECTED!");
+
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "ERROR!");
+                //MessageBox.Show(this, ex.Message, "ERROR Connecting!");
             }
            
         }
@@ -410,7 +383,7 @@ namespace QLSX.DVES
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "ERROR!");
+                //MessageBox.Show(this, ex.Message, "ERROR!");
             }
             
 
@@ -420,15 +393,19 @@ namespace QLSX.DVES
         {
             try
             {
+                timer1.Stop();
+
                 m_sock.Shutdown(SocketShutdown.Both);
                 m_sock.Close();
+                
+                this.Hide();
                 Popup_Machine machine = new Popup_Machine();
                 machine.Show();
-                this.Hide();
+                
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "ERROR!");
+                //MessageBox.Show(this, ex.Message, "ERROR!");
             }
             
         }
@@ -444,7 +421,7 @@ namespace QLSX.DVES
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "ERROR!");
+                //MessageBox.Show(this, ex.Message, "ERROR!");
             }
         }
 
@@ -460,7 +437,7 @@ namespace QLSX.DVES
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "ERROR!");
+                //MessageBox.Show(this, ex.Message, "ERROR!");
             }
         }
 
@@ -476,7 +453,7 @@ namespace QLSX.DVES
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "ERROR!");
+                //MessageBox.Show(this, ex.Message, "ERROR!");
             }
         }
 
@@ -492,7 +469,7 @@ namespace QLSX.DVES
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "ERROR!");
+                //MessageBox.Show(this, ex.Message, "ERROR!");
             }
         }
 
@@ -508,7 +485,7 @@ namespace QLSX.DVES
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "ERROR!");
+                //MessageBox.Show(this, ex.Message, "ERROR!");
             }
         }
 
@@ -524,7 +501,7 @@ namespace QLSX.DVES
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "ERROR!");
+                //MessageBox.Show(this, ex.Message, "ERROR!");
             }
         }
 
@@ -540,7 +517,7 @@ namespace QLSX.DVES
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "ERROR!");
+               // MessageBox.Show(this, ex.Message, "ERROR!");
             }
         }
 
@@ -556,7 +533,7 @@ namespace QLSX.DVES
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "ERROR!");
+                //MessageBox.Show(this, ex.Message, "ERROR!");
             }
         }
 
@@ -572,7 +549,7 @@ namespace QLSX.DVES
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "ERROR!");
+                //MessageBox.Show(this, ex.Message, "ERROR!");
             }
         }
 
@@ -588,7 +565,7 @@ namespace QLSX.DVES
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "ERROR!");
+                //MessageBox.Show(this, ex.Message, "ERROR!");
             }
         }
 
@@ -604,7 +581,7 @@ namespace QLSX.DVES
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "ERROR!");
+                //MessageBox.Show(this, ex.Message, "ERROR!");
             }
         }
 
@@ -620,7 +597,7 @@ namespace QLSX.DVES
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "ERROR!");
+                //MessageBox.Show(this, ex.Message, "ERROR!");
             }
         }
 
@@ -636,7 +613,7 @@ namespace QLSX.DVES
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "ERROR!");
+                //MessageBox.Show(this, ex.Message, "ERROR!");
             }
         }
 
@@ -652,7 +629,7 @@ namespace QLSX.DVES
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "ERROR!");
+                //MessageBox.Show(this, ex.Message, "ERROR!");
             }
         }
 
@@ -668,7 +645,7 @@ namespace QLSX.DVES
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "ERROR!");
+                //MessageBox.Show(this, ex.Message, "ERROR!");
             }
         }
 
@@ -684,7 +661,7 @@ namespace QLSX.DVES
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "ERROR!");
+                //MessageBox.Show(this, ex.Message, "ERROR!");
             }
         }
 
@@ -700,8 +677,37 @@ namespace QLSX.DVES
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "ERROR!");
+                //MessageBox.Show(this, ex.Message, "ERROR!");
             }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            
+            try
+            {
+                if (m_sock == null || !m_sock.Connected)
+                {
+                    //MessageBox.Show(this, "M_SOCK DIS");
+                    pic_stt_connect.Image = Properties.Resources.notconnected;
+                    connected();
+                }
+                
+                else 
+                {
+                    
+                    //MessageBox.Show(this,  "SENDDATA");
+                    SenData();
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(this, ex.Message, "ERROR!");
+                throw;
+            }
+            
+                
         }
     }
 

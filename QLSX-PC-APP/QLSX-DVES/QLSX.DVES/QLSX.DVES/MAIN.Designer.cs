@@ -97,6 +97,7 @@
             this.time = new System.Windows.Forms.Label();
             this.btnConnect = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.pic_stt_connect = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.machine_1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.machine_2)).BeginInit();
@@ -135,6 +136,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.machine_16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.machine_17)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_stt_connect)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -813,7 +815,20 @@
             // 
             // timer1
             // 
-            this.timer1.Interval = 3000;
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 6000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // pic_stt_connect
+            // 
+            this.pic_stt_connect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pic_stt_connect.Image = global::QLSX.DVES.Properties.Resources.notconnected;
+            this.pic_stt_connect.Location = new System.Drawing.Point(12, 841);
+            this.pic_stt_connect.Name = "pic_stt_connect";
+            this.pic_stt_connect.Size = new System.Drawing.Size(100, 50);
+            this.pic_stt_connect.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pic_stt_connect.TabIndex = 80;
+            this.pic_stt_connect.TabStop = false;
             // 
             // MAIN
             // 
@@ -822,6 +837,7 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.CausesValidation = false;
             this.ClientSize = new System.Drawing.Size(1555, 903);
+            this.Controls.Add(this.pic_stt_connect);
             this.Controls.Add(this.btnConnect);
             this.Controls.Add(this.time);
             this.Controls.Add(this.txtGetdata);
@@ -931,6 +947,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.machine_16)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.machine_17)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_stt_connect)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1002,6 +1019,7 @@
         private System.Windows.Forms.Label time;
         private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.PictureBox pic_stt_connect;
     }
 }
 

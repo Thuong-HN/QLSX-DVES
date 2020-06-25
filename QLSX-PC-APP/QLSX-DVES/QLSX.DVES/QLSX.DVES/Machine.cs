@@ -44,9 +44,9 @@ namespace QLSX.DVES
             //this.WindowState = FormWindowState.Maximized;
             // ****************************************************************
             //insertData();
-            
-            //getData();
 
+            //getData();
+            
             connected();
             // Add Message Event handler for Form decoupling from input thread
             m_AddMessage = new AddMessage(OnAddMessage);
@@ -86,21 +86,14 @@ namespace QLSX.DVES
                 if (m_sock != null && m_sock.Connected)
                 {
                     m_sock.Shutdown(SocketShutdown.Both);
-                    System.Threading.Thread.Sleep(10);
+                    System.Threading.Thread.Sleep(2);
                     m_sock.Close();
                 }
 
                 // Create the socket object
                 m_sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-
                 // Define the Server address and port
                 IPEndPoint epServer = new IPEndPoint(IPAddress.Parse("192.168.2.244"), 80);
-
-                // Connect to the server blocking method and setup callback for recieved data
-                // m_sock.Connect( epServer );
-                // SetupRecieveCallback( m_sock );
-
-                // Connect to server non-Blocking method
                 m_sock.Blocking = false;
                 AsyncCallback onconnect = new AsyncCallback(OnConnect);
                 m_sock.BeginConnect(epServer, onconnect, m_sock);
@@ -342,12 +335,9 @@ namespace QLSX.DVES
 
         private void back_Click(object sender, EventArgs e)
         {
-            if (m_sock != null && m_sock.Connected)
-            {
-                m_sock.Shutdown(SocketShutdown.Both);
-                m_sock.Close();
-            }
-
+         
+            m_sock.Shutdown(SocketShutdown.Both);
+            m_sock.Close();
             MAIN main = new MAIN();
             main.Show();
             this.Close();

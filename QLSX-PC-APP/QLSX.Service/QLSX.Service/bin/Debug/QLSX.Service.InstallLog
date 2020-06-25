@@ -33,3 +33,84 @@ Affected parameters are:
    logtoconsole = 
    logfile = D:\DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.InstallLog
    assemblypath = D:\DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.exe
+Installing assembly 'D:\GITHUB\QLSX-DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\GITHUB\QLSX-DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.InstallLog
+   assemblypath = D:\GITHUB\QLSX-DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.exe
+Installing service Service1...
+Creating EventLog source Service1 in log Application...
+Rolling back assembly 'D:\GITHUB\QLSX-DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\GITHUB\QLSX-DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.InstallLog
+   assemblypath = D:\GITHUB\QLSX-DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.exe
+Restoring event log to previous state for source Service1.
+Installing assembly 'D:\GITHUB\QLSX-DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\GITHUB\QLSX-DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.InstallLog
+   assemblypath = D:\GITHUB\QLSX-DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.exe
+Installing service Service1...
+Service Service1 has been successfully installed.
+Creating EventLog source Service1 in log Application...
+Committing assembly 'D:\GITHUB\QLSX-DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\GITHUB\QLSX-DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.InstallLog
+   assemblypath = D:\GITHUB\QLSX-DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.exe
+Uninstalling assembly 'D:\GITHUB\QLSX-DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\GITHUB\QLSX-DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.InstallLog
+   assemblypath = D:\GITHUB\QLSX-DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.exe
+Removing EventLog source Service1.
+Service Service1 is being removed from the system...
+Service Service1 was successfully removed from the system.
+Installing assembly 'D:\GITHUB\QLSX-DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\GITHUB\QLSX-DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.InstallLog
+   assemblypath = D:\GITHUB\QLSX-DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.exe
+Installing service Service1...
+Service Service1 has been successfully installed.
+Creating EventLog source Service1 in log Application...
+Committing assembly 'D:\GITHUB\QLSX-DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\GITHUB\QLSX-DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.InstallLog
+   assemblypath = D:\GITHUB\QLSX-DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.exe
+Installing assembly 'D:\GITHUB\QLSX-DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\GITHUB\QLSX-DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.InstallLog
+   assemblypath = D:\GITHUB\QLSX-DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.exe
+Installing service Service1...
+Service Service1 has been successfully installed.
+Creating EventLog source Service1 in log Application...
+Committing assembly 'D:\GITHUB\QLSX-DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\GITHUB\QLSX-DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.InstallLog
+   assemblypath = D:\GITHUB\QLSX-DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.exe
+Uninstalling assembly 'D:\GITHUB\QLSX-DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\GITHUB\QLSX-DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.InstallLog
+   assemblypath = D:\GITHUB\QLSX-DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.exe
+Removing EventLog source Service1.
+Service Service1 is being removed from the system...
+Service Service1 was successfully removed from the system.
+Installing assembly 'D:\GITHUB\QLSX-DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\GITHUB\QLSX-DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.InstallLog
+   assemblypath = D:\GITHUB\QLSX-DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.exe
+Installing service Service1...
+Service Service1 has been successfully installed.
+Creating EventLog source Service1 in log Application...
+Committing assembly 'D:\GITHUB\QLSX-DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\GITHUB\QLSX-DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.InstallLog
+   assemblypath = D:\GITHUB\QLSX-DVES\QLSX-PC-APP\QLSX.Service\QLSX.Service\bin\Debug\QLSX.Service.exe
